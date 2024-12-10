@@ -261,7 +261,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
                     {tab.label}
                   </button>
                 ))}
-                <div className="mt-auto flex flex-col gap-2">
+                <div className="mt-auto flex flex-col gap-2 hidden">
                   <a
                     href="https://github.com/coleam00/bolt.new-any-llm"
                     target="_blank"
