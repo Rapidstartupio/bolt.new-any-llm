@@ -4,3 +4,12 @@ compatibility_flags = ["nodejs_compat"]
 compatibility_date = "2024-07-01"
 pages_build_output_dir = "./build/client"
 send_metrics = false
+
+[build]
+command = "pnpm build"  # or your build command
+
+[build.upload]
+format = "service-worker"
+
+[triggers]
+crons = []  # Add any cron triggers if needed
