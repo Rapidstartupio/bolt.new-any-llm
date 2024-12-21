@@ -38,6 +38,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
     const savedLocalModelsState = Cookies.get('isLocalModelsEnabled');
     return savedLocalModelsState === 'true';
   });
+  const [netlifyToken, setNetlifyToken] = useState(Cookies.get('netlifyToken') || '');
 
   // Load base URLs from cookies
   const [baseUrls, setBaseUrls] = useState(() => {
@@ -221,6 +222,11 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
     Cookies.set('isLocalModelsEnabled', String(enabled));
   };
 
+  const handleSaveNetlifyConnection = () => {
+    Cookies.set('netlifyToken', netlifyToken);
+    toast.success('Netlify token saved successfully!');
+  };
+
   return (
     <RadixDialog.Root open={open}>
       <RadixDialog.Portal>
@@ -244,7 +250,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
             <div className="flex h-full">
               <div
                 className={classNames(
-                  'w-48 border-r border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 p-4 flex flex-col justify-between',
+                  'w-48 border-r border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 p-4 flex flex-col justify-between justify-start',
                   styles['settings-tabs'],
                 )}
               >
@@ -466,6 +472,42 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
                         >
                           Save Connection
                         </button>
+                      </div>
+
+                      <div className="mt-8">
+                        <h3 className="text-lg font-medium text-bolt-elements-textPrimary mb-4">Netlify Connection</h3>
+                        <div className="flex mb-4">
+                          <div className="flex-1">
+                            <label className="block text-sm text-bolt-elements-textSecondary mb-1">
+                              Netlify Access Token:
+                            </label>
+                            <input
+                              type="password"
+                              value={netlifyToken}
+                              onChange={(e) => setNetlifyToken(e.target.value)}
+                              className="w-full bg-white dark:bg-bolt-elements-background-depth-4 relative px-2 py-1.5 rounded-md focus:outline-none placeholder-bolt-elements-textTertiary text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary border border-bolt-elements-borderColor"
+                            />
+                            <p className="text-xs text-bolt-elements-textTertiary mt-1">
+                              Get your token from{' '}
+                              <a
+                                href="https://app.netlify.com/user/applications#personal-access-tokens"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-bolt-elements-textAccent hover:underline"
+                              >
+                                Netlify Access Tokens
+                              </a>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex mb-4">
+                          <button
+                            onClick={handleSaveNetlifyConnection}
+                            className="bg-bolt-elements-button-primary-background rounded-lg px-4 py-2 mr-2 transition-colors duration-200 hover:bg-bolt-elements-button-primary-backgroundHover text-bolt-elements-button-primary-text"
+                          >
+                            Save Netlify Token
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )}
