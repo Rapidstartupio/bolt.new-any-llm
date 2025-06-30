@@ -1,0 +1,10 @@
+{
+  "plugins": [],
+  "services": [
+    {
+      "name": "n8n",
+      "source": ".",
+      "env": "./.env"
+    }
+  ]
+}

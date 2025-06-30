@@ -8,7 +8,7 @@ const iconPaths = globSync('./icons/*.svg');
 const collectionName = 'bolt';
 
 const customIconCollection = iconPaths.reduce(
-  (acc, iconPath) => {
+  (acc: Record<string, Record<string, () => Promise<string>>>, iconPath: string) => {
     const [iconName] = basename(iconPath).split('.');
 
     acc[collectionName] ??= {};
@@ -233,8 +233,8 @@ export default defineConfig({
   presets: [
     presetUno({
       dark: {
-        light: '[data-theme="light"]',
         dark: '[data-theme="dark"]',
+        light: '[data-theme="light"]',
       },
     }),
     presetIcons({
