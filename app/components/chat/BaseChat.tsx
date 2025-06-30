@@ -169,8 +169,8 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         recognition.interimResults = true;
 
         recognition.onresult = (event) => {
-          const transcript = Array.from(event.results)
-            .map((result) => result[0])
+          const transcript = Array.from(event.results as SpeechRecognitionResultList)
+            .map((result: SpeechRecognitionResult) => result[0])
             .map((result) => result.transcript)
             .join('');
 
