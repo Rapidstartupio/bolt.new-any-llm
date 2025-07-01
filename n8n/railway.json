@@ -1,10 +1,12 @@
 {
-  "plugins": [],
-  "services": [
-    {
-      "name": "n8n",
-      "source": ".",
-      "env": "./.env"
-    }
-  ]
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "n8n/Dockerfile"
+  },
+  "deploy": {
+    "numReplicas": 1,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
 }

@@ -1,18 +1,13 @@
 FROM n8nio/n8n:latest
-#ARG N8N_VERSION=latest
 
-#RUN apk add --update graphicsmagick tzdata
-
-#USER root
-
-#RUN apk --update add --virtual build-dependencies python3 build-base && \
-#    npm_config_user=root npm install --location=global n8n@${N8N_VERSION} && \
-#    apk del build-dependencies
-
+# Set the work directory
 WORKDIR /data
 
-EXPOSE $PORT
+# Railway dynamically assigns the PORT
+EXPOSE ${PORT}
 
-ENV N8N_USER_ID=root
+# n8n runs as node user by default, ensure proper permissions
+USER node
 
-#CMD export N8N_PORT=$PORT && n8n start
+# Start n8n
+CMD ["n8n", "start"]
