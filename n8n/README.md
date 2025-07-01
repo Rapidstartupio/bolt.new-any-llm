@@ -37,6 +37,7 @@ Railway provides internal networking between services in the same project. Servi
 1. Click "New Service" again
 2. Select "GitHub Repo" and connect your repository
 3. Point to the `/n8n` directory in your repo
+4. Set the root directory to `/n8n` in the service settings
 
 ### 4. Configure n8n Environment Variables
 
@@ -66,6 +67,9 @@ N8N_ENCRYPTION_KEY=your-32-char-encryption-key-here
 # Port Configuration (Railway sets this automatically)
 PORT=${{PORT}}
 N8N_PORT=${{PORT}}
+
+# Disable file permissions warning (optional)
+N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 ```
 
 ### 5. Using Internal Networking
@@ -81,8 +85,12 @@ DB_POSTGRESDB_HOST=postgres.railway.internal
 2. **Same Project**: Both services must be in the same Railway project
 3. **Variable References**: Use `${{VARIABLE_NAME}}` syntax to reference variables from other services
 4. **Encryption Key**: Generate a secure 32-character encryption key for `N8N_ENCRYPTION_KEY`
+5. **Port Binding**: Make sure both `PORT` and `N8N_PORT` are set to `${{PORT}}` for Railway
 
 ## Troubleshooting
+
+### "command n8n not found" Error
+This happens when the Dockerfile overrides the official n8n image's entrypoint. The official n8n Docker image should be used as-is without custom CMD or ENTRYPOINT directives.
 
 ### Connection Refused Error
 If you see `connect ECONNREFUSED ::1:5432`, it means n8n is trying to connect to localhost. Check:

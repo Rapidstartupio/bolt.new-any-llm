@@ -1,13 +1,8 @@
 FROM n8nio/n8n:latest
 
-# Set the work directory
-WORKDIR /data
-
-# Railway dynamically assigns the PORT
+# The official n8n image already sets up everything correctly
+# We just need to expose the port that Railway provides
 EXPOSE ${PORT}
 
-# n8n runs as node user by default, ensure proper permissions
-USER node
-
-# Start n8n
-CMD ["n8n", "start"]
+# The official n8n image already has the correct ENTRYPOINT and CMD
+# It will start n8n automatically with the right user and permissions
