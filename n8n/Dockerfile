@@ -4,7 +4,7 @@ ARG N8N_VERSION=1.56.1
 
 RUN apk add --update graphicsmagick tzdata
 
-USER node
+USER root
 
 RUN apk --update add --virtual build-dependencies python3 build-base && \
     npm_config_user=root npm install --location=global n8n@${N8N_VERSION} && \
@@ -16,9 +16,7 @@ EXPOSE 5678
 
 ENV N8N_USER_ID=root
 
+# Only switch to node user after all installs are done
+USER node
+
 CMD ["n8n", "start"]
-
-# FROM n8nio/n8n:latest
-# Add any customizations here
-
-RUN node -e "console.log('ENV:', process.env)"
