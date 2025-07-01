@@ -16,9 +16,8 @@ EXPOSE $PORT
 
 ENV N8N_USER_ID=root
 
-CMD export N8N_PORT=$PORT && n8n start
+CMD ["n8n", "start"]
 
 # FROM n8nio/n8n:latest
 # Add any customizations here
-ENV DB_TYPE=postgresdb
-ENV DB_POSTGRESDB_CONNECTION_STRING=postgresql://postgres:PxInYBIHJuCnGQGlVJwWzetppFNqKsTD@gondola.proxy.rlwy.net:38191/railway
+
