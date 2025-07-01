@@ -10,9 +10,9 @@ export default function TestConnection() {
   const testConnections = async () => {
     setLoading(true);
 
-        try {
+    try {
       const response = await fetch('/api/db-test');
-      const data = await response.json() as any;
+      const data = (await response.json()) as any;
       setResults(data);
 
       if (data.success) {
